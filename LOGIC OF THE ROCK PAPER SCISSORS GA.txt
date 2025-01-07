@@ -1,0 +1,29 @@
+LOGIC OF THE ROCK PAPER SCISSORS GAME
+getComputerChoice {
+randomly return either Rock or Paper or Scissors
+store the computer's choice in a variable
+//Check how to make the computer's choice case insensitive.
+}
+
+getHumanChoice {
+use prompt to get user input and save to a variable
+return variable to the function, if variable is valid
+make the user's choice case insensitive
+}
+
+keep track of the player's score using one variable for the computer and another for the human.
+
+WRITE logic to play a single round of the game
+create a function that takes the computer and human choice as arguments
+plays a single round, increments the winners score and logs a Winner
+CREATE function playRound(cc, hc) {
+IF hc wins, add points to human score
+IF cc wins, add points to computer score
+}
+
+WRITE logic to play a five round game 
+playGame {
+for (i=1; i<=5; i++) {
+
+}
+}

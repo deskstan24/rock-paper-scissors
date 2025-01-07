@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissor Game</title>
+  </head>
+  <body>
+    <script>
+      let humanScore = 0;
+
+      let computerScore = 0;
+
+      let computerOptions = ["rock", "paper", "scissor"];
+      function getComputerChoice() {
+        let computerNumber = Math.floor(Math.random() * 3);
+        let computerGameOption = computerOptions[computerNumber];
+        return computerGameOption;
+      }
+
+      function getHumanChoice() {
+        let choice = prompt("Rock Paper Scissors");
+        if (choice == "rock" || choice == "paper" || choice == "scissors") {
+          return choice;
+        } else {
+          console.log("invalid response");
+        }
+      }
+
+      function playRound(computerChoice, humanChoice) {
+        if (computerChoice == "rock" && humanChoice == "paper") {
+          console.log("You Win!");
+          console.log(++humanScore);
+        } else if (computerChoice == "paper" && humanChoice == "scissors") {
+          console.log("You Win!");
+          console.log(++humanScore);
+        } else if (computerChoice == "scissors" && humanChoice == "rock") {
+          console.log("You Win!");
+          console.log(++humanScore);
+        } else if (computerChoice == "rock" && humanChoice == "scissors") {
+          console.log("You Lose!");
+          console.log(++computerScore);
+        } else if (computerChoice == "paper" && humanChoice == "rock") {
+          console.log("You Lose!");
+          console.log(++computerScore);
+        } else if (computerChoice == "scissors" && humanChoice == "paper") {
+          console.log("You Lose!");
+          console.log(++computerScore);
+        } else {
+          console.log("It's a draw!");
+        }
+      }
+
+      const computerSelection = getComputerChoice();
+      const humanSelection = getHumanChoice();
+
+      function playGame() {
+        let numberOfGames = 1;
+        do {
+          playRound(computerSelection, humanSelection);
+          numberOfGames++;
+        } while (numberOfGames <= 5);
+      }
+
+      playGame();
+    </script>
+  </body>
+</html>
