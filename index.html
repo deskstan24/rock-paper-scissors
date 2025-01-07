@@ -11,7 +11,7 @@
 
       let computerScore = 0;
 
-      let computerOptions = ["rock", "paper", "scissor"];
+      let computerOptions = ["rock", "paper", "scissors"];
 
       //Function to get computer's choice
       function getComputerChoice() {
@@ -33,7 +33,9 @@
 
       function playRound(computerChoice, humanChoice) {
         //The logic behind the rock, paper, scissors game.
-        if (computerChoice == "rock" && humanChoice == "paper") {
+        if (computerChoice === humanChoice) {
+          console.log("It's a draw!");
+        } else if (computerChoice == "rock" && humanChoice == "paper") {
           console.log("You Win!");
           console.log("You get " + ++humanScore + " points");
         } else if (computerChoice == "paper" && humanChoice == "scissors") {
@@ -51,28 +53,12 @@
         } else if (computerChoice == "scissors" && humanChoice == "paper") {
           console.log("You Lose!");
           console.log("Computer gets " + `${++computerScore}` + " points");
-        } else if (computerChoice == "rock" && humanChoice == "rock") {
-          console.log("It's a draw!");
-        } else if (computerChoice == "paper" && humanChoice == "paper") {
-          console.log("It's a draw!");
-        } else if (computerChoice == "scissors" && humanChoice == "scissors") {
-          console.log("It's a draw!");
         }
       }
 
-      // function playGame() {
-      //   let numberOfGames = 1;
-      //   do {
-      //     playRound(computerSelection, humanSelection);
-      //     numberOfGames++;
-      //   } while (numberOfGames <= 5);
-      // }
-
       function playGame() {
         let numberOfGames = 1;
-
-        // Loop to play the game 5 times
-        while (numberOfGames <= 5) {
+        do {
           // Generate new selections for each round
           let computerSelection = getComputerChoice();
           let humanSelection = getHumanChoice();
@@ -82,6 +68,20 @@
 
           // Increment the game counter
           numberOfGames++;
+        } while (numberOfGames <= 5);
+
+        console.log("\n--- Game Over ---");
+        console.log(
+          `Final Scores: You: ${humanScore}, Computer: ${computerScore}`
+        );
+
+        //Condition for Selecting the overall winner of the game
+        if (humanScore > computerScore) {
+          console.log("Congratulations! You are the overall winner!");
+        } else if (humanScore < computerScore) {
+          console.log("The computer wins! Better luck next time.");
+        } else {
+          console.log("It's a tie!");
         }
       }
 
