@@ -12,12 +12,16 @@
       let computerScore = 0;
 
       let computerOptions = ["rock", "paper", "scissor"];
+
+      //Function to get computer's choice
       function getComputerChoice() {
+        //randomly generate computer's choice
         let computerNumber = Math.floor(Math.random() * 3);
         let computerGameOption = computerOptions[computerNumber];
         return computerGameOption;
       }
 
+      //Function to get human's choice
       function getHumanChoice() {
         let choice = prompt("Rock Paper Scissors").toLowerCase();
         if (choice == "rock" || choice == "paper" || choice == "scissors") {
@@ -28,6 +32,7 @@
       }
 
       function playRound(computerChoice, humanChoice) {
+        //The logic behind the rock, paper, scissors game.
         if (computerChoice == "rock" && humanChoice == "paper") {
           console.log("You Win!");
           console.log("You get " + ++humanScore + " points");
@@ -78,7 +83,6 @@
           // Increment the game counter
           numberOfGames++;
         }
-        // console.log("Game Over: You've played 5 rounds!");
       }
 
       playGame();
