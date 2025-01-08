@@ -23,7 +23,10 @@ IF cc wins, add points to computer score
 
 WRITE logic to play a five round game 
 playGame {
-for (i=1; i<=5; i++) {
-
+do{
+ write code here
+} while (numberOfGames <=5)
+write code to calculate the winner of the game
+Write code to return the winner of the game
 }
-}
+call function playGame
