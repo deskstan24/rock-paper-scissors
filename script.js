@@ -1,7 +1,14 @@
+"use strict";
+
+let divResult = document.querySelector(".result");
+let resultText = document.querySelector(".result-text");
+let rock = document.querySelector(".rock");
+let paper = document.querySelector(".paper");
+let scissors = document.querySelector(".scissors");
+
 let humanScore = 0;
-
 let computerScore = 0;
-
+let gameOver = false; //To teack if the game is over
 let computerOptions = ["rock", "paper", "scissors"];
 
 //Function to get computer's choice
@@ -12,67 +19,60 @@ function getComputerChoice() {
   return computerGameOption;
 }
 
-//Function to get human's choice
-function getHumanChoice() {
-  let choice = prompt("Rock Paper Scissors").toLowerCase();
-  if (choice == "rock" || choice == "paper" || choice == "scissors") {
-    return choice;
-  } else {
-    console.log("invalid response");
-  }
-}
-
+//Function to play a single round
 function playRound(computerChoice, humanChoice) {
   //The logic behind the rock, paper, scissors game.
+  if (gameOver) return;
   if (computerChoice === humanChoice) {
-    console.log("It's a draw!");
-  } else if (computerChoice == "rock" && humanChoice == "paper") {
-    console.log("You Win!");
-    console.log("You get " + ++humanScore + " points");
-  } else if (computerChoice == "paper" && humanChoice == "scissors") {
-    console.log("You Win!");
-    console.log("You get " + ++humanScore + " points");
-  } else if (computerChoice == "scissors" && humanChoice == "rock") {
-    console.log("You Win!");
-    console.log("You get " + ++humanScore + " points");
-  } else if (computerChoice == "rock" && humanChoice == "scissors") {
-    console.log("You Lose!");
-    console.log("Computer gets " + `${++computerScore}` + " points");
-  } else if (computerChoice == "paper" && humanChoice == "rock") {
-    console.log("You Lose!");
-    console.log("Computer gets " + `${++computerScore}` + " points");
-  } else if (computerChoice == "scissors" && humanChoice == "paper") {
-    console.log("You Lose!");
-    console.log("Computer gets " + `${++computerScore}` + " points");
-  }
-}
-
-//Function for making the entire game work
-function playGame() {
-  let numberOfGames = 1;
-  do {
-    // Generate new selections for each round
-    let computerSelection = getComputerChoice();
-    let humanSelection = getHumanChoice();
-
-    // Play a single round
-    playRound(computerSelection, humanSelection);
-
-    // Increment the game counter
-    numberOfGames++;
-  } while (numberOfGames <= 5);
-
-  console.log("\n--- Game Over ---");
-  //Code for displaying the final scores
-  console.log(`Final Scores: You: ${humanScore}, Computer: ${computerScore}`);
-
-  //Condition for Selecting the overall winner of the game
-  if (humanScore > computerScore) {
-    console.log("Congratulations! You are the overall winner!");
-  } else if (humanScore < computerScore) {
-    console.log("The computer wins! Better luck next time.");
+    resultText.textContent = `It's a draw, you both chose ${humanChoice}`;
+  } else if (
+    (computerChoice == "rock" && humanChoice == "paper") ||
+    (computerChoice == "paper" && humanChoice == "scissors") ||
+    (computerChoice == "scissors" && humanChoice == "rock")
+  ) {
+    humanScore++;
+    resultText.textContent = `You Win this round ${humanChoice} beats ${computerChoice}`;
   } else {
-    console.log("It's a tie!");
+    computerScore++;
+    resultText.textContent = `You lose this round ${computerChoice} beats ${humanChoice}`;
+  }
+
+  updateScore();
+  checkWinner();
+}
+
+//Function to Update Scores
+function updateScore() {
+  divResult.innerHTML = `Your Score: ${humanScore} <br> Computer's Score: ${computerScore}`;
+}
+
+//Function to check for a winner
+function checkWinner() {
+  if (humanScore === 5) {
+    resultText.textContent = "Congratulations! You Won the GAME!";
+    gameOver = true;
+  } else if (computerScore === 5) {
+    resultText.textContent = "The Computer Wins. Better Luck next TIme";
+    gameOver = true;
   }
 }
-playGame();
+
+//Event Listeners for Human's Choice
+rock.addEventListener("click", (e) => {
+  if (!gameOver) {
+    let humanChoice = e.target.textContent.toLowerCase();
+    playRound(getComputerChoice(), humanChoice);
+  }
+});
+paper.addEventListener("click", (e) => {
+  if (!gameOver) {
+    let humanChoice = e.target.textContent.toLowerCase();
+    playRound(getComputerChoice(), humanChoice);
+  }
+});
+scissors.addEventListener("click", (e) => {
+  if (!gameOver) {
+    let humanChoice = e.target.textContent.toLowerCase();
+    playRound(getComputerChoice(), humanChoice);
+  }
+});
